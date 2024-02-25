@@ -63,6 +63,20 @@ p{font-size:larger}
     margin-bottom: 2px;
     display: inline-block;
 }
+.rectanglelong
+{
+    width: 80%;
+    height: auto;
+    border: 2px solid orange; 
+    background-color: orange;
+    border-radius: 10px;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    display:inline-block;
+}
 .rectanglegrand
 {
     width: auto;
