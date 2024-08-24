@@ -6,4 +6,4 @@ Morphez 3.0
 VisuCourbes 1.0
 CryptFacile 1.1
 EditionMultiImages 1.2
-STEPCAL 1.0
+STEPCAL 1.1
