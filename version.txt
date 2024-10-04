@@ -1,5 +1,5 @@
 <noindex>
-SchemaElec 2.16.1
+SchemaElec 2.16.2
 IpChange 3.2
 Minuteur 2.1
 Morphez 3.0
