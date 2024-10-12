@@ -7,3 +7,4 @@ VisuCourbes 1.0
 CryptFacile 1.1
 EditionMultiImages 1.2
 STEPCAL 1.1
+VAREXP_EDITOR 1.0
