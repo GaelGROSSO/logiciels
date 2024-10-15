@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>GG prog</title>
+    <meta charset="UTF-8">
+    <link href="styleStepCal.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--Titre-->
+    <h1>
+        <div id="haut_de_page">
+            <div id="centrer_vertical"><a href="index.html" style="Color:#FFFFFF">GG logiciels</a></div>
+        </div>
+    </h1>
+
+    <!--Page-->
+    <div class="rectanglegrand">
+        <h2>STEPCAL Online</h2>
+        <p>
+            Logiciel facilitant les calculs d'exploitation de station d'epuration<br>
+            <img src="data/im/STEPCAL.png" width="128" height="128"><br>
+            Ce programme est disponible en version téléchargable sur la page d'acceuil.
+        </p>
+    </div>
+    <br><br><br>
+
+
+    <select name="combobox1" id="combobox1" onchange="ChangeCombobox()">
+        <option value="">--Choisir un calcul--</option>
+        <option value="Concentration">Concentration</option>
+        <option value="Siccité">Siccité</option>
+        <option value="Ecart">Ecart</option>
+        <option value="VD30">VD30</option>
+        <option value="Soutirage">Soutirage</option>
+        <option value="Top Debit Pompe">Top Debit Pompe</option>
+        <option value="Top Debit Vis">Top Debit Vis</option>
+        <option value="Préparation">Préparation</option>
+        <option value="Prélévement">Prélévement</option>
+        <option value="Métrologie Préleveur">Métrologie Préleveur</option>
+        <option value="Décantation Lamellaire">Décantation Lamellaire</option>
+        <option value="Temps de Séjour">Temps de Séjour</option>
+        <option value="Vitesse Ascensionnelle">Vitesse Ascensionnelle</option>
+        <option value="Surface totale projetée">Surface totale projetée</option>
+        <option value="Vitesse de Hazen">Vitesse de Hazen</option>
+        <option value="Taux Chlorure Ferrique">Taux Chlorure Ferrique</option>
+        <option value="Taux">Taux</option>
+    </select>
+
+    <br><br>
+
+    <div id="Panel_Textbox" class="paneltextbox">
+
+    </div>
+
+
+    <br><br>
+    <button type="button" onclick="click_Valide()"> Calculer </button><br>
+    <label id="labelresultat">##### </label>
+
+    <script>
+        function ChangeCombobox() {
+            let combotxt = document.getElementById("combobox1").value;
+            let texte = [""];
+            let unit = [""];
+            switch (combotxt) {
+                case "Concentration":
+                    texte = ["Tare", "Volume", "Poids sec"];
+                    unit = ["g", "ml", "g"];
+                    break;
+                case "Siccité":
+                    texte = ["Tare","Poids Humide", "Poids sec"];
+                    unit = ["g","g", "g"];
+                    break;
+                case "Ecart":
+                    texte = ["Valeur 1", "Valeur 2"];
+                    unit = [" ", " "];
+                    break;
+                case "Soutirage":
+                    texte = ["Mes", "Debit usine", "Debit pompe", "concentration boues"];
+                    unit = ["gm/l", "m3/h", "m3/h", "g/l"];
+                    break;
+                case "Top Debit Pompe":
+                    texte = ["Débit Theorique", "Volume", "Temps"];
+                    unit = ["l/h", "ml", "s"];
+                    break;
+                case "Top Debit Vis":
+                    texte = ["Débit Theorique", "Poids", "Temps"];
+                    unit = ["kg/h", "g", "s"];
+                    break;
+                case "Préparation":
+                    texte = ["Temps mesure", "Poids", "Temps injection", "Volume preparation"];
+                    unit = ["s", "g", "s", "l"];
+                    break;
+                case "Prélévement":
+                    texte = ["Nombre prélévement", "Poids", "Température", "Vol Journalier", "Top prélevement", "Volume d'un prélèvement"];
+                    unit = [" ", "kg", "°C", "m3", "m3", "ml"];
+                    break;
+                case "Métrologie Préleveur":
+                    texte = ["Temperature", "Volume 1", "Volume 2", "Volume 3", "Temps 1", "Temps 2", "Temps 3", "Volume Théorique", "Longeur Tuyau"];
+                    unit = ["°C", "ml", "ml", "ml", "s", "s", "s", "ml", "m"];
+                    break;
+                case "Temps de Séjour":
+                    texte = ["Volume Bassin", "Debit"];
+                    unit = ["m3", "m3/h"];
+                    break;
+                case "Vitesse Ascensionnelle":
+                    texte = ["Debit", "Surface"];
+                    unit = ["m3/h", "m2"];
+                    break;
+                case "Surface totale projetée":
+                    texte = ["Nombre Lames", "Surface Lame", "Angle lame"];
+                    unit = [" ", "m2", "°"];
+                    break;
+                case "Vitesse de Hazen":
+                    texte = ["Debit", "Nombre Lames", "Surface Lame", "Angle lame"];
+                    unit = ["m3/h", " ", "m2", "°"];
+                    break;
+                case "Décantation Lamellaire":
+                    texte = ["Debit", "Surface Miroir", "Debit de pointe", "Nombre Lames", "Surface Lame", "Angle lame"];
+                    unit = ["m3/h", "m2", "m3/h", " ", "m2", "°"];
+                    break;
+                case "Taux Chlorure Ferrique":
+                    texte = ["Debit FeCl3", "Debit eau"];
+                    unit = ["l/h", "m3/h"];
+                    break;
+                case "Taux":
+                    texte = ["Debit produit", "Concentration prepa", "Debit eau"];
+                    unit = ["l/h", "g/l", "m3/h"];
+                    break;
+                case "VD30":
+                    texte = ["Volume 30min", "Concentration", "Dillution"];
+                    unit = ["ml", "g/l", " "];
+                    break;
+            }
+            
+            //Creer les textbox que l'on veut
+            document.getElementById("Panel_Textbox").innerHTML = "";
+            let panel = document.getElementById("Panel_Textbox");
+            for (let i = 0; i < texte.length; i++) {
+
+                let label = document.createElement("label");
+                label.setAttribute("id", "label" + i);
+                label.innerText = texte[i] + " ";
+                panel.appendChild(label);
+
+                let textbox = document.createElement("input");
+                textbox.setAttribute("type", "text");
+                textbox.setAttribute("id", "textbox" + i);
+                textbox.setAttribute("placeholder", "Entrez valeur");
+                panel.appendChild(textbox);
+
+                let labelunit = document.createElement("label");
+                labelunit.setAttribute("id", "labelunit" + i);
+                labelunit.innerText = " " + unit[i];
+                panel.appendChild(labelunit);
+            }
+        }
+
+
+        function click_Valide() {
+            //Recuperation des informations
+            let nb_txt = 0;
+            for (let i = 0; i < 20; i++) {
+                let txt = document.getElementById("textbox" + i);
+                if (txt) { nb_txt++; }
+            }
+            reals = new Array(nb_txt)
+            for (let i = 0; i < nb_txt; i++) {
+                reals[i] = parseFloat(document.getElementById("textbox" + i).value);
+            }
+            let result = 0.0;
+            let resultatAff = "";
+            let combotxt = document.getElementById("combobox1").value;
+
+            //Choix du calcul
+            let tar, vol, vol2, sec, hum, a, b, mes, qeb, q, qppboue, Masse_sortir, cons, theo, poids, nb, temp, tps, tps2, tps3, vol3, taille, surface, surfacemiroir, angle;
+
+            switch (combotxt) {
+                case "Concentration":
+                    tar = reals[0];
+                    vol = reals[1];
+                    sec = reals[2];
+                    result = (sec - tar) / (vol * 0.001);
+                    resultatAff = combotxt + " = " + result.toFixed(2) + " g/l";
+                    break;
+                case "Siccité":
+                    tar = reals[0];
+                    hum = reals[1];
+                    sec = reals[2];
+                    result = (sec-tar) /(hum-tar) * 100;
+                    resultatAff = combotxt + " = " + result.toFixed(2) + " %";
+                    break;
+                case "Ecart":
+                    a = reals[0];
+                    b = reals[1];
+                    result = (a - b) / a * 100;
+                    resultatAff = combotxt + " = " + result.toFixed(2) + " %";
+                    break;
+                case "Soutirage":
+                    mes = reals[0];
+                    qeb = reals[1];
+                    qppboue = reals[2];
+                    cons = reals[3];
+                    Masse_sortir = ((mes / 1000) - (0.15 * mes) / 1000) * qeb;
+                    tps = (Masse_sortir / cons) / qppboue;
+                    resultatAff = "Masse à sortir = " + Masse_sortir.toFixed(2) + "Kg/h<br>Temps de soutirage = " + tps.toFixed(2) + "h";
+                    break;
+                case "Top Debit Pompe":
+                    theo = reals[0];
+                    vol = reals[1];
+                    tps = reals[2];
+                    result = (vol * 0.001) * 3600 / tps;
+                    a = (theo - result) / theo * 100;
+                    resultatAff = "Debit pompe = " + result.toFixed(2) + "l/h<br>Ecart = " + a.toFixed(2) + "%";
+                    break;
+                case "Top Debit Vis":
+                    theo = reals[0];
+                    poids = reals[1];
+                    tps = reals[2];
+                    result = (poids * 0.001) * 3600 / tps;
+                    a = (theo - result) / theo * 100;
+                    resultatAff = "Debit vis = " + result.toFixed(2) + "Kg/h<br>Ecart = " + a.toFixed(2) + "%";
+                    break;
+                case "Préparation":
+                    tps = reals[0];
+                    poids = reals[1];
+                    tps2 = reals[2];
+                    vol = reals[3];
+                    result = ((poids / tps) * tps2) / vol;
+                    resultatAff = "Concentration préparation = " + result.toFixed(2) + "g/l";
+                    break;
+                case "Prélévement":
+                    nb = reals[0];
+                    poids = reals[1];
+                    temp = reals[2];
+                    qeb = reals[3];
+                    vol = reals[4];
+                    vol2 = reals[5];
+                    theo = qeb / vol;
+                    result = (theo - nb) / theo * 100;
+                    result1 = (nb * vol2) * 0.001;
+                    result2 = (result1 - poids) / result1 * 100;
+                    if (temp < 8 & temp > 2 & result > -10 & result < 10 & result2 > -10 & result2 < 10) {
+                        resultatAff = "Conforme<br>Nombre prélevement theorique = " + theo.toFixed(2) + "<br>Ecart = " + result.toFixed(2) + "%<br>Poids theorique = " + result1.toFixed(2) + "Kg<br>Ecart = " + result2.toFixed(2) + "%";
+                    }
+                    else {
+                        resultatAff = "Non Conforme<br>Nombre prélevement theorique = " + theo.toFixed(2) + "<br>Ecart = " + result.toFixed(2) + "%<br>Poids theorique = " + result1.toFixed(2) + "Kg<br>Ecart = " + result2.toFixed(2) + "%";
+                        Affiche_resultat(resultatAff, "#FF0000");
+                        return;
+                    }
+                    break;
+                case "Métrologie Préleveur":
+                    temp = reals[0];
+                    vol = reals[1];
+                    vol2 = reals[2];
+                    vol3 = reals[3];
+                    tps = reals[4];
+                    tps2 = reals[5];
+                    tps3 = reals[6];
+                    theo = reals[7];
+                    taille = reals[8];
+                    result = (vol + vol2 + vol3) / 3;
+                    result1 = (result - theo) / result;
+                    result2 = taille / ((tps + tps2 + tps3) / 3);
+                    if (temp < 8 & temp > 2 & result1 > -10 & result1 < 10 & result2 > 0.5) {
+                        resultatAff = "Conforme<br>Volume Moyen = " + result.toFixed(2) + "<br>Ecart = " + result1.toFixed(2) + "%<br>Vitesse = " + result2.toFixed(2) + "m/s >0.5";
+                    }
+                    else {
+                        resultatAff = "Non Conforme<br>Volume Moyen = " + result.toFixed(2) + "<br>Ecart = " + result1.toFixed(2) + "%<br>Vitesse = " + result2.toFixed(2) + "m/s >0.5";
+                        Affiche_resultat(resultatAff, "#FF0000");
+                        return;
+                    }
+                    break;
+                case "Temps de Séjour":
+                    vol = reals[0];
+                    qeb = reals[1];
+                    result = vol / qeb;
+                    resultatAff = "Temps de séjour = " + result.toFixed(2) + "h";
+                    break;
+                case "Vitesse Ascensionnelle":
+                    qeb = reals[0];
+                    surface = reals[1];
+                    result = (qeb / 60) / surface;
+                    resultatAff = "Vitesse Ascensionnelle = " + result.toFixed(2) + "m/s";
+                    break;
+                case "Surface totale projetée":
+                    nb = reals[0];
+                    surface = reals[1];
+                    angle = reals[2];
+                    result = nb * surface * float.Cos(angle);
+                    resultatAff = "Surface totale projetée = " + result.toFixed(2) + "m2";
+                    break;
+                case "Vitesse de Hazen":
+                    qeb = reals[0];
+                    nb = reals[1];
+                    surface = reals[2];
+                    angle = reals[3];
+                    result = (qeb / 60) / (nb * surface * float.Cos(angle));
+                    resultatAff = "Vitesse de Hazen = " + result.toFixed(2) + "m/s";
+                    break;
+                case "Décantation Lamellaire":
+                    qeb = reals[0];
+                    surfacemiroir = reals[1];
+                    q = reals[1];
+                    nb = reals[2];
+                    surface = reals[3];
+                    angle = reals[4];
+                    result = (q / 60) / (nb * surface * float.Cos(angle));
+                    result2 = (qeb / 60) / surfacemiroir;
+                    if (result2 > result)
+                        resultatAff = "Vitesse au miroir = " + result2.toFixed(2) + "m/s<br>Vitesse de Hazen = " + result.toFixed(2) + "m/s<br> Decantation possible Vc>Vh";
+                    else {
+                        Affiche_resultat(resultatAff, "#FF0000");
+                        resultatAff = "Vitesse au miroir = " + result2.toFixed(2) + "m/s<br>Vitesse de Hazen = " + result.toFixed(2) + "m/s<br> Decantation Impossible Vh>Vc";
+                        return;
+                    }
+
+                    break;
+                case "Taux Chlorure Ferrique":
+                    q = reals[0];
+                    qeb = reals[1];
+                    result = (q * 1.4) / qeb * 1000;
+                    resultatAff = "Taux FeCl3 = " + result.toFixed(2) + "g/m3";
+                    break;
+                case "Taux":
+                    q = reals[0];
+                    cons = reals[1];
+                    qeb = reals[2];
+                    result = (q * cons) / qeb;
+                    resultatAff = "Taux = " + result.toFixed(2) + "g/m3";
+                    break;
+                case "VD30":
+                    vol = reals[0];
+                    cons = reals[1];
+                    a = reals[2];
+                    result = (vol / a) / cons;
+                    if (vol > 300) {
+                        resultatAff = "Refaire la VD30 avec une dillution plus importante<br>IB = " + result.toFixed(2);
+                        Affiche_resultat(resultatAff, "#FF0000");
+                        return;
+                    }
+                    resultatAff = "IB = " + result.toFixed(2);
+                    break;
+                default:
+                    document.getElementById("labelresultat").innerHTML = "Opération inconnue.";
+                    Affiche_resultat("Opération inconnue.", "#FF0000");
+                    return; // Sortir si l'opération n'est pas connue
+            }
+            //Resultat
+            //document.getElementById("labelresultat").innerHTML = resultatAff;
+            Affiche_resultat(resultatAff, "#FFFFFF");
+        };
+        function Affiche_resultat(txt, color1) {
+            document.getElementById("labelresultat").innerHTML = txt;
+            document.getElementById("labelresultat").style.color = color1;
+        }
+
+    </script>
+
+    <br><br><br>
+    <!--Fin de page-->
+
+    <div id="bas_de_page">
+        <div id="centrer_vertical">
+            Gael GROSSO 2024<br>
+            Contact <a href="mailto:gaelgrosso@live.fr"> gaelgrosso@live.fr</a> <br>
+            Les logiciels sont gratuits mais ne peuvent pas être reproduits, modifiés ou revendus.<br>
+            <!--<a href = "pagecontact.html" style="color:#FFFFFF">Concact</a>-->
+        </div>
+    </div>
+</body>
+
+
+
+</html>
