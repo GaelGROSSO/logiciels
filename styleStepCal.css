@@ -34,13 +34,16 @@ a{text-decoration: none; }
 }
 
 #bas_de_page {
+
   display: table;
-  width: 100%;
-  height: auto;
-  margin: auto;
-  background-color: #00BFFF;
-  text-align: center;
-  border-radius: 10px;
+    width:100%;
+    height: auto;
+    margin: auto;
+    background-color: #00BFFF;;
+    text-align: center;
+    border-radius: 10px;
+  position: relative;
+  bottom: 0;
 }
 
 #centrer_vertical {
@@ -80,7 +83,7 @@ button {
 .paneltextbox
 {
     display:grid;
-    grid-template-columns: 40% 20% 40%;
+    grid-template-columns: 36% 28% 36%;
 }
 .paneltextbox > label:nth-child(3n + 1) {
   justify-self :right; 

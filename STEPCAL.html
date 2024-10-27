@@ -14,20 +14,23 @@
             <div id="centrer_vertical"><a href="index.html" style="Color:#FFFFFF">GG logiciels</a></div>
         </div>
     </h1>
-
+    
     <!--Page-->
+    <!--
     <div class="rectanglegrand">
         <h2>STEPCAL Online</h2>
         <p>
+            <img src="data/im/STEPCAL.png" width="64" height="64"><br>
             Logiciel facilitant les calculs d'exploitation de station d'epuration<br>
-            <img src="data/im/STEPCAL.png" width="128" height="128"><br>
-            Ce programme est disponible en version téléchargable sur la page d'acceuil.
+            
         </p>
     </div>
-    <br><br><br>
+-->
+<img src="data/im/stepcalonline.png" width="20%"><br>
+    <br>
 
-
-    <select name="combobox1" id="combobox1" onchange="ChangeCombobox()">
+    
+    <select name="combobox1" id="combobox1" onchange="ChangeCombobox()" style="width: 20%; border-radius: 10px;">
         <option value="">--Choisir un calcul--</option>
         <option value="Concentration">Concentration</option>
         <option value="Siccité">Siccité</option>
@@ -54,10 +57,12 @@
 
     </div>
 
+    <br><br>
+    <button type="button" onclick="click_Valide()" style="width: 20%; border-radius: 10px;" > Calculer </button><br><br>
+    
+    <label id="labelresultat" style="font-size:x-large;">##### </label>
 
     <br><br>
-    <button type="button" onclick="click_Valide()"> Calculer </button><br>
-    <label id="labelresultat">##### </label>
 
     <script>
         function ChangeCombobox() {
@@ -79,7 +84,7 @@
                     break;
                 case "Soutirage":
                     texte = ["Mes", "Debit usine", "Debit pompe", "concentration boues"];
-                    unit = ["gm/l", "m3/h", "m3/h", "g/l"];
+                    unit = ["mg/l", "m3/h", "m3/h", "g/l"];
                     break;
                 case "Top Debit Pompe":
                     texte = ["Débit Theorique", "Volume", "Temps"];
@@ -134,7 +139,7 @@
                     unit = ["ml", "g/l", " "];
                     break;
             }
-            
+            document.getElementById("labelresultat").innerHTML = "######";
             //Creer les textbox que l'on veut
             document.getElementById("Panel_Textbox").innerHTML = "";
             let panel = document.getElementById("Panel_Textbox");
@@ -149,6 +154,7 @@
                 textbox.setAttribute("type", "text");
                 textbox.setAttribute("id", "textbox" + i);
                 textbox.setAttribute("placeholder", "Entrez valeur");
+                textbox.style.borderRadius = "10px";
                 panel.appendChild(textbox);
 
                 let labelunit = document.createElement("label");
@@ -289,7 +295,7 @@
                     nb = reals[0];
                     surface = reals[1];
                     angle = reals[2];
-                    result = nb * surface * float.Cos(angle);
+                    result = nb * surface * Math.cos(angle);
                     resultatAff = "Surface totale projetée = " + result.toFixed(2) + "m2";
                     break;
                 case "Vitesse de Hazen":
@@ -297,7 +303,7 @@
                     nb = reals[1];
                     surface = reals[2];
                     angle = reals[3];
-                    result = (qeb / 60) / (nb * surface * float.Cos(angle));
+                    result = (qeb / 60) / (nb * surface * Math.cos(angle));
                     resultatAff = "Vitesse de Hazen = " + result.toFixed(2) + "m/s";
                     break;
                 case "Décantation Lamellaire":
@@ -307,7 +313,7 @@
                     nb = reals[2];
                     surface = reals[3];
                     angle = reals[4];
-                    result = (q / 60) / (nb * surface * float.Cos(angle));
+                    result = (q / 60) / (nb * surface * Math.cos(angle));
                     result2 = (qeb / 60) / surfacemiroir;
                     if (result2 > result)
                         resultatAff = "Vitesse au miroir = " + result2.toFixed(2) + "m/s<br>Vitesse de Hazen = " + result.toFixed(2) + "m/s<br> Decantation possible Vc>Vh";
