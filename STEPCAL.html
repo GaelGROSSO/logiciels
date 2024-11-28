@@ -5,51 +5,113 @@
     <title>STEPCAL</title>
     <meta charset="UTF-8">
     <link href="styleStepCal.css" rel="stylesheet">
-    <link href="data/im/logo2.ico" rel="shortcut icon" >
+    <link href="data/im/logo2.ico" rel="shortcut icon">
 </head>
-
+<style>
+    html, body {
+        height: 100%; /* Nécessaire pour que min-height fonctionne correctement */
+    }
+    </style>
 <body>
     <!--Titre-->
-    
-<img src="data/im/stepcalonline.png" width="20%"><br>
-    <br>
+    <main>
+        
+        <img src="data/im/stepcalonline.png" width="25%"><br><br>
+        <br>
+        <div id="page">
+            <select name="combobox2" id="combobox2" onchange="ChangeCombobox2()"
+                style="width: 20%; border-radius: 10px;">
+                <option value="Laboratoire">Laboratoire</option>
+                <option value="Metrologie">Metrologie</option>
+                <option value="Top Debit">TopDebit</option>
+                <option value="Exploitation">Exploitation</option>
+            </select>
 
-    
-    <select name="combobox1" id="combobox1" onchange="ChangeCombobox()" style="width: 20%; border-radius: 10px;">
-        <option value="">--Choisir un calcul--</option>
-        <option value="Concentration">Concentration</option>
-        <option value="Siccité">Siccité</option>
-        <option value="Ecart">Ecart</option>
-        <option value="VD30">VD30</option>
-        <option value="Soutirage">Soutirage</option>
-        <option value="Top Debit Pompe">Top Debit Pompe</option>
-        <option value="Top Debit Vis">Top Debit Vis</option>
-        <option value="Préparation">Préparation</option>
-        <option value="Prélévement">Prélévement</option>
-        <option value="Métrologie Préleveur">Métrologie Préleveur</option>
-        <option value="Décantation Lamellaire">Décantation Lamellaire</option>
-        <option value="Temps de Séjour">Temps de Séjour</option>
-        <option value="Vitesse Ascensionnelle">Vitesse Ascensionnelle</option>
-        <option value="Surface totale projetée">Surface totale projetée</option>
-        <option value="Vitesse de Hazen">Vitesse de Hazen</option>
-        <option value="Taux Chlorure Ferrique">Taux Chlorure Ferrique</option>
-        <option value="Taux">Taux</option>
-    </select>
+            <select name="combobox1" id="combobox1" onchange="ChangeCombobox()"
+                style="width: 20%; border-radius: 10px;">
+                <option value="">--Choisir un calcul--</option>
+            </select>
 
-    <br><br>
+            <br><br>
 
-    <div id="Panel_Textbox" class="paneltextbox">
+            <div id="Panel_Textbox" class="paneltextbox">
 
-    </div>
+            </div>
 
-    <br><br>
-    <button type="button" onclick="click_Valide()" style="width: 20%; border-radius: 10px;" > Calculer </button><br><br>
-    
-    <label id="labelresultat" style="font-size:x-large;">##### </label>
+            <br><br>
+            <button type="button" onclick="click_Valide()" style="width: 20%; border-radius: 10px;"> Calculer
+            </button><br><br>
 
-    <br><br>
+            <label id="labelresultat" style="font-size:x-large;">##### </label>
+
+            <br><br>
+        </div>
+    </main>
+    <footer id="foot">
+        STEPCAL Online© 2024 Version 2.0 <br>
+        Gael GROSSO<br>
+        <!--Contact <a href="mailto:gaelgrosso@live.fr"> gaelgrosso@live.fr</a> -->
+    </footer>
+
+
 
     <script>
+        ChangeCombobox2();
+        ChangeCombobox();
+
+
+        function ChangeCombobox2() {
+            const combo1 = document.getElementById("combobox1");
+            let combo2 = document.getElementById("combobox2").value;
+            let newoption = [];
+
+            combo1.innerHTML = '';
+            switch (combo2) {
+                case "Laboratoire":
+                    newoption = [
+                        { value: "Concentration", text: "Concentration" },
+                        { value: "Siccité", text: "Siccité" },
+                        { value: "VD30", text: "VD30" },
+                        { value: "Prélèvement", text: "Prélèvement" },
+                        { value: "Ecart", text: "Ecart" }
+                    ];
+                    break;
+                case "Metrologie":
+                    newoption = [
+                        { value: "Métrologie Préleveur", text: "Métrologie Préleveur" }
+                    ];
+                    break;
+                case "Top Debit":
+                    newoption = [
+                        { value: "Top Debit Pompe", text: "Top Debit Pompe" },
+                        { value: "Top Debit Vis", text: "Top Debit Vis" },
+                        { value: "Préparation", text: "Préparation" }
+                    ];
+                    break;
+                case "Exploitation":
+                    newoption = [
+                        { value: "Taux", text: "Taux" },
+                        { value: "Taux Chlorure Ferrique", text: "Taux Chlorure Ferrique" },
+                        { value: "Temps de Séjour", text: "Temps de Séjour" },
+                        { value: "Décantation Lamellaire", text: "Décantation Lamellaire" },
+                        { value: "Vitesse Ascensionnelle", text: "Vitesse Ascensionnelle" },
+                        { value: "Vitesse de Hazen", text: "Vitesse de Hazen" },
+                        { value: "Surface totale projetée", text: "Surface totale projetée" },
+                        { value: "Soutirage", text: "Soutirage" }
+                    ];
+                    break;
+                    newoption = [
+                        { value: "", text: "--Choisir un menu--" }]
+            }
+            newoption.forEach(optionData => {
+                const option = document.createElement('option');
+                option.value = optionData.value;
+                option.textContent = optionData.text;
+                combo1.appendChild(option);
+            });
+            ChangeCombobox();
+        }
+
         function ChangeCombobox() {
             let combotxt = document.getElementById("combobox1").value;
             let texte = [""];
@@ -60,8 +122,8 @@
                     unit = ["g", "ml", "g"];
                     break;
                 case "Siccité":
-                    texte = ["Tare","Poids Humide", "Poids sec"];
-                    unit = ["g","g", "g"];
+                    texte = ["Tare", "Poids Humide", "Poids sec"];
+                    unit = ["g", "g", "g"];
                     break;
                 case "Ecart":
                     texte = ["Valeur 1", "Valeur 2"];
@@ -83,8 +145,8 @@
                     texte = ["Temps mesure", "Poids", "Temps injection", "Volume preparation"];
                     unit = ["s", "g", "s", "l"];
                     break;
-                case "Prélévement":
-                    texte = ["Nombre prélévement", "Poids", "Température", "Vol Journalier", "Top prélevement", "Volume d'un prélèvement"];
+                case "Prélèvement":
+                    texte = ["Nombre Prélèvement", "Poids", "Température", "Vol Journalier", "Top prélevement", "Volume d'un prélèvement"];
                     unit = [" ", "kg", "°C", "m3", "m3", "ml"];
                     break;
                 case "Métrologie Préleveur":
@@ -146,6 +208,14 @@
                 labelunit.setAttribute("id", "labelunit" + i);
                 labelunit.innerText = " " + unit[i];
                 panel.appendChild(labelunit);
+
+
+                //let page = document.querySelector('main');
+                //let rect = element.getBoundingClientRect();
+                
+
+                //let foot = document.getElementById("foot");
+                //foot.style.position = "absolute";
             }
         }
 
@@ -180,7 +250,7 @@
                     tar = reals[0];
                     hum = reals[1];
                     sec = reals[2];
-                    result = (sec-tar) /(hum-tar) * 100;
+                    result = (sec - tar) / (hum - tar) * 100;
                     resultatAff = combotxt + " = " + result.toFixed(2) + " %";
                     break;
                 case "Ecart":
@@ -222,7 +292,7 @@
                     result = ((poids / tps) * tps2) / vol;
                     resultatAff = "Concentration préparation = " + result.toFixed(2) + "g/l";
                     break;
-                case "Prélévement":
+                case "Prélèvement":
                     nb = reals[0];
                     poids = reals[1];
                     temp = reals[2];
@@ -350,8 +420,7 @@
 
     </script>
 
-    <br><br><br>
-    <!--Fin de page-->
+
 
 </body>
 
