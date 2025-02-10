@@ -7,5 +7,5 @@ VisuCourbes 1.0
 CryptFacile 1.1
 EditionMultiImages 1.2
 STEPCAL 1.2
-VAREXP_EDITOR 1.0
+VAREXP_EDITOR 1.1
 EditeurPdf 1.0
