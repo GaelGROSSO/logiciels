@@ -5,7 +5,7 @@ Minuteur 2.1
 Morphez 3.0
 VisuCourbes 1.0
 CryptFacile 1.1
-EditionMultiImages 1.2
+EditionMultiImages 1.3
 STEPCAL 1.2
 VAREXP_EDITOR 1.3
 EditeurPdf 1.1
