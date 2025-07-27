@@ -4,7 +4,7 @@ IpChange 3.3
 Minuteur 2.1
 Morphez 3.0
 VisuCourbes 1.0
-CryptFacile 1.1
+CryptFacile 2.0
 EditionMultiImages 1.4
 STEPCAL 1.2
 VAREXP_EDITOR 1.4
