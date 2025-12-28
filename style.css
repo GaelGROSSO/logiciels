@@ -1,98 +1,66 @@
-
-body
-{
+body {
     background-color: rgb(46, 46, 46);
-    color : white;
+    color: white;
+    /* align-items et align-content ne fonctionnent ici que si le body est en display: flex */
+    text-align: center;
+    font-family: 'Nunito', sans-serif; /* Remplacement de cursive par sans-serif pour Nunito */
+}
+
+p { font-size: larger; }
+a { text-decoration: none; }
+
+/* --- Entête et Pied de page --- */
+#haut_de_page, #bas_de_page {
+    display: flex; /* Remplacement de table par flex pour plus de modernité */
     align-items: center;
-    text-align: center;
-    align-content: center;
-    font-family: 'Nunito', cursive;
-}
-/*h1{background-color: orange;}*/
-p{font-size:larger}
-a{text-decoration: none; }
-#carte
-{
-    width: auto;
-    margin: auto;
-    background-color: transparent;
-    text-align: center;
-    align-content: center;
-
-}
-#haut_de_page
-{
-    display: table;
-    width:100%;
-    height: 100px;
-    margin: auto;
+    justify-content: center;
+    width: 100%;
+    min-height: 100px;
     background-color: orange;
-    text-align: center;
     border-radius: 10px;
-}
-#bas_de_page
-{
-    display: table;
-    width:100%;
-    height: auto;
-    margin: auto;
-    background-color: #ffa500;
-    text-align: center;
-    border-radius: 10px;
-
-    
+    margin-bottom: 20px;
 }
 
-#centrer_vertical
-{
-    display: table-cell;
-    vertical-align: middle;
+/* --- Grille de logiciels --- */
+.conteneur-rectangles {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 15px;
+    align-items: stretch; /* C'est cette ligne qui force la même hauteur */
 }
-#zonebasse
-{
-    text-align:center;
-}
-.rectanglepetit
-{
+
+.rectanglepetit {
     width: 30%;
-    height: auto;
-    background-color: transparent;
-    border: 2px solid orange; 
+    min-width: 280px; /* Évite que les rectangles soient trop étroits sur petit écran */
     background-color: orange;
-    border-radius: 10px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    display: inline-block;
-}
-.rectanglelong
-{
-    width: 80%;
-    height: auto;
-    border: 2px solid orange; 
-    background-color: orange;
-    border-radius: 10px;
-    text-align:center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    display:inline-block;
-}
-.rectanglegrand
-{
-    width: auto;
-    height: auto;
-    background-color: transparent;
     border: 2px solid orange;
-    background-color: orange; 
     border-radius: 10px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    display: inline-block;
+    padding: 15px;
+    box-sizing: border-box; /* Très important pour que le padding ne déforme pas la largeur */
+    
+    /* Pour aligner le contenu intérieur (optionnel) */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+/* --- Autres styles --- */
+.rectanglelong {
+    width: 80%;
+    border: 2px solid orange; 
+    background-color: orange;
+    border-radius: 10px;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.rectanglegrand {
+    width: 90%; /* "auto" sur un inline-block peut parfois poser problème */
+    max-width: 800px;
+    background-color: orange; 
+    border: 2px solid orange;
+    border-radius: 10px;
+    margin: 20px auto;
+    padding: 20px;
 }
