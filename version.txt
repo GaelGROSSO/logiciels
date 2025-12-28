@@ -1,7 +1,7 @@
 <noindex>
 SchemaElec 4.4
 IpChange 3.3
-Minuteur 2.1
+Minuteur 3.0
 Morphez 3.0
 VisuCourbes 1.0
 CryptFacile 2.0
