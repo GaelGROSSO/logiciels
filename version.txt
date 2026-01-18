@@ -9,3 +9,4 @@ EditionMultiImages 1.4
 STEPCAL 1.2
 VAREXP_EDITOR 1.4
 EditeurPdf 1.1
+AddVarSch 1.0
