@@ -11,3 +11,4 @@ VAREXP_EDITOR 1.4
 EditeurPdf 1.1
 AddVarSch 1.1
 CalculElec 0.1
+BasicST 1.0
