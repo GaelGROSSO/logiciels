@@ -10,6 +10,6 @@ STEPCAL 1.2
 VAREXP_EDITOR 2.1
 EditeurPdf 2.0
 FusionPdf 2.0
-AddVarSch 1.1
+AddVarSch 1.2
 CalculElec 0.1
 BasicST 1.0
